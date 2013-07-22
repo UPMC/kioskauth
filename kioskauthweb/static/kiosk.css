@@ -1,0 +1,67 @@
+body {
+  font-family: Tahoma, Verdana, "Deja Vu", Arial, Sans-Serif;
+  font-size: 30px;
+  margin: 0;
+  color: #3E4759;
+}
+
+#header {
+  background-color: #699DC7;
+  background-image: url(upmc.png);
+  background-repeat: no-repeat;
+  padding: 15px 40px 0 0;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  height: 54px;
+}
+
+#title {
+  text-align: center;
+}
+
+#subtitle {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 15px 20px 0 30px;
+  background-color: #3E4759;
+  height: 54px;
+}
+
+.notification, .success, .error, .minibox {
+  padding: 16px 10px 16px 70px;
+  background-repeat: no-repeat;
+  background-position: 20px center;
+  border-radius: 7px;
+  margin: 30px auto;
+  width: 900px;
+  font-size: 24px;
+}
+.notification {
+  border: 1px dotted #777777;
+  color: #777777;
+  background-color: #FCF5CC;
+  background-image: url(notification.png);
+}
+
+.success {
+  border: 1px dotted #425C2F;
+  color: #425C2F;
+  background-color: #D6F0C9;
+  background-image: url(success.png);
+}
+
+ .error {
+  border: 1px dotted #E36B6B;
+  color: #E63232;
+  background-color: #F7D7D7;
+  background-image: url(error.png);
+}
+
+.minibox {
+  border: 1px dotted #8BB0C9;
+  background-color: #E8F3FA;
+  background-image: url(login.png);
+}

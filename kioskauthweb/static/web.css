@@ -1,0 +1,67 @@
+body {
+  font-family: Tahoma, Verdana, "Deja Vu", Arial, Sans-Serif;
+  font-size: 12px;
+  margin: 0px;
+  color: #3E4759;
+}
+
+input {
+  font-family: Tahoma, Verdana, "Deja Vu", Arial, Sans-Serif;
+  font-size: 12px;
+}
+
+h2 {
+  font-size: 14px;
+}
+
+#menu {
+  background-color: #699DC7;
+  padding: 10px;
+  clear: both;
+}
+
+#menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+#tabs {
+  margin: 0 30px;
+}
+
+.notification, .success, .error, .minibox {
+  padding: 16px 10px 16px 70px;
+  background-repeat: no-repeat;
+  background-position: 20px center;
+  border-radius: 7px;
+  margin: 30px 30px;
+}
+
+.notification {
+  border: 1px dotted #777777;
+  color: #777777;
+  background-color: #FCF5CC;
+  background-image: url(notification.png);
+}
+
+.success {
+  border: 1px dotted #425C2F;
+  color: #425C2F;
+  background-color: #D6F0C9;
+  background-image: url(success.png);
+}
+
+ .error {
+  border: 1px dotted #E36B6B;
+  color: #E63232;
+  background-color: #F7D7D7;
+  background-image: url(error.png);
+}
+
+.minibox {
+  border: 1px dotted #8BB0C9;
+  background-color: #E8F3FA;
+  background-image: url(process.png);
+}
