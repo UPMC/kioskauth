@@ -7,7 +7,6 @@ $context = scard_establish_context();
 if (scard_is_valid_context($context))
 {
   $readers = scard_list_readers($context);
-  $readers[0] = 'SCM Microsystems Inc. SCR35xx USB Smart Card Reader 0';
   
   if (is_array($readers) && count($readers) > 0)
   {
@@ -38,6 +37,10 @@ if (scard_is_valid_context($context))
       
       $data['uid'] = pack('H*', (substr($data['anb']['00B204C43C'], 18, 14)));
     }
+  }
+  else
+  {
+    $data = array('status' => 'noreader');
   }
 }
 

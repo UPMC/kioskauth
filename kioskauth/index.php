@@ -75,6 +75,11 @@ function reader()
       {
         uid = data['uid'];
       }
+	  else if (data['status'] == 'noreader')
+      {
+        $('#message').html("Aucun lecteur de carte disponible.");
+        $('#message').attr('class', 'error');
+      }
       else if (data['status'] == 'nocard')
       {
         $('#message').html("Aucune carte détectée.");
@@ -289,14 +294,19 @@ function analyse()
     type: 'GET',
     url: 'api_analyse.php',
     success: function(data, textStatus, jqXHR)
-	  {
+	{
       $('#out').html(ObjectDump(data));
       
-	    if (data['status'] == 'success')
+	  if (data['status'] == 'success')
       {
-	      $('#message').html("Données de la carte récupérées avec succès.");
-		    $('#message').attr('class', 'success');
-	    }
+	    $('#message').html("Données de la carte récupérées avec succès.");
+		$('#message').attr('class', 'success');
+	  }
+	  else if (data['status'] == 'noreader')
+      {
+        $('#message').html("Aucun lecteur de carte disponible.");
+        $('#message').attr('class', 'error');
+      }
       else if (data['status'] == 'nocard')
       {
         $('#message').html("Aucune carte détectée.");
