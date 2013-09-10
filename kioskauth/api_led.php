@@ -1,7 +1,7 @@
 <?php
 
 $data = array('status' => 'error');
-
+/*
 if (isset($_GET['led']))
 {
   $led = (string)$_GET['led'];
@@ -54,5 +54,5 @@ if (isset($_GET['led']))
     fclose($com);
   }
 }
-
+*/
 echo json_encode($data);

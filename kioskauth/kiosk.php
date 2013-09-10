@@ -1,3 +1,4 @@
+﻿<?php echo $ok ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
@@ -39,41 +40,27 @@ function reader()
     {
       if (data['status'] == 'success')
       {
+        $('#message').html("Exécution en cours...");
+        $('#message').attr('class', 'notification');
+        $('#picture').attr('src', 'static/loader.gif');
+
         ldap(data['uid']);
         remove();
       }
       else if (data['status'] == 'nocard')
       {
-        $('#message').html('Veuillez insérer votre carte dans le lecteur.');
+        $('#message').html('Insérez votre carte dans le lecteur.');
         $('#message').attr('class', 'notification');
-        $('#picture').attr('src', 'static/reader.png');
-        
-        $.ajax({
-          dataType: "json",
-          type: 'GET',
-          url: 'api_led.php',
-          data: { 'led': 'card.green.blink' },
-          success: function(data, textStatus, jqXHR) {},
-          error: function() {}
-        });
+        $('#picture').attr('src', 'static/insert.gif');
         
         setTimeout(function() { reader(); }, 1000);
       }
       else if (data['status'] == 'invalid')
       {
-        $('#message').html('Carte illisible ou non supportée.');
+        $('#message').html('Carte non supportée.');
         $('#message').attr('class', 'error');
         $('#picture').attr('src', 'static/bug.png');
-        
-        $.ajax({
-          dataType: "json",
-          type: 'GET',
-          url: 'api_led.php',
-          data: { 'led': 'card.red.blink' },
-          success: function(data, textStatus, jqXHR) {},
-          error: function() {}
-        });
-      
+
         remove();
       }
       else
@@ -96,10 +83,6 @@ function reader()
 
 function ldap(uid)
 {
-  $('#message').html("Récupération de votre fiche dans l'annuaire UPMC...");
-  $('#message').attr('class', 'notification');
-  $('#picture').attr('src', 'static/loader.gif');
-  
   $.ajax({
     dataType: "json",
     type: 'GET',
@@ -113,7 +96,7 @@ function ldap(uid)
       }
       else
       {
-        $('#message').html('Erreur ApiLdap. Veuillez vous adresser au technicien.');
+        $('#message').html("Votre compte est introuvable dans l'annuaire UPMC.");
         $('#message').attr('class', 'error');
         $('#picture').attr('src', 'static/bug.png');
       }
@@ -129,10 +112,6 @@ function ldap(uid)
 
 function create(uid, user)
 {
-  $('#message').html("Execution de la commande sur le serveur d'authentification...");
-  $('#message').attr('class', 'notification');
-  $('#picture').attr('src', 'static/loader.gif');
-  
   $.ajax({
     dataType: "json",
     type: 'GET',
@@ -142,17 +121,11 @@ function create(uid, user)
     {
       if (data['status'] == 'enabled')
       {
-        $('#message').html('Votre mot de passe a été réinitialisé.');
-        $('#message').attr('class', 'success');
-
-        setTimeout(function() { printer(uid, data['password'], user, 'recovery'); }, 2000);
+        printer(uid, data['password'], user, 'recovery');
       }
       else if (data['status'] == 'created')
       {
-        $('#message').html('Votre compte a été créé. Il est en attente de validation.');
-        $('#message').attr('class', 'success');
-      
-        setTimeout(function() { printer(uid, data['password'], user, 'new'); }, 2000);
+        printer(uid, data['password'], user, 'new');
       }
       else if (data['status'] == 'disabled')
       {
@@ -178,10 +151,6 @@ function create(uid, user)
 
 function printer(uid, password, user, type)
 {
-  $('#message').html("Impression des informations de connexion en cours...");
-  $('#message').attr('class', 'notification');
-  $('#picture').attr('src', 'static/loader.gif');
-  
   $.ajax({
     dataType: "json",
     type: 'GET',
@@ -191,7 +160,7 @@ function printer(uid, password, user, type)
     {
       if (data['status'] == 'success')
       {
-        $('#message').html("Impression du document. Vous pouvez récupérer votre carte.");
+        $('#message').html("Exécution terminée. Récupérez votre carte.");
         $('#message').attr('class', 'success');
       }
       else

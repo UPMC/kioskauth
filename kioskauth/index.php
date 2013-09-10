@@ -11,9 +11,8 @@
 
 <body>
 
-<div id="message" class="notification">
-  Veuillez séléctionner une action à executer.
-</div>
+<div class="title">KioskAuth &rsaquo; Tableau de bord</div>
+
 
 <div id="tabs">
   <ul>
@@ -23,33 +22,36 @@
     <li><a href="#analyse">Analyse de carte</a></li>
   </ul>
   <div id="create">
-    <h2>Saisissez un numéro étudiant ou insérez une carte</h2>
+    <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
     <p><input type="text" id="inCreate" /> <input type="button" value="Créer" onclick="create()" /></p>
-	  <p><span style="color: #bbb">Garder le champs vide pour une saisie par carte. Les cartes permettent uniquement de créer un compte dont le nom est le numéro étudiant.</span>
-</p>
+	<p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
     <table cellspacing="8">
       <tr>
         <td><input type="checkbox" checked="checked" id="printChk" /></td>
         <td>
-          <label for="printChk">Imprimer les paramètres de connexion</label><br />
-          <span style="color: #bbb">Contrairement au kiosk automatique, les prénom et nom ne seront pas pré-remplis via l'annuaire afin d'autoriser la création des utilisateurs exterieurs.</span>
+          <label for="printChk">Imprimer la charte et les informations de connexion</label><br />
         </td>
       </tr>
     </table>
-	  
   </div>
   <div id="enable">
-    <h2>Saisissez un numéro étudiant ou insérez une carte</h2>
+    <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
     <p><input type="text" id="inEnable" /> <input type="button" value="Activer" onclick="enable()" /></p>
+    <p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
   </div>
   <div id="ldap">
-    <h2>Saisissez un numéro étudiant ou insérez une carte</h2>
+    <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
     <p><input type="text" id="inLdap" /> <input type="button" value="Afficher" onclick="ldap()" /></p>
+    <p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
   </div>
   <div id="analyse">
-    <h2>Insérez une carte étudiant à analyser</h2>
+    <h2>Insérez une carte étudiant à analyser.</h2>
     <p><input type="button" value="Analyser" onclick="analyse()" /></p>
   </div>
+</div>
+
+<div id="message" class="notification">
+  En attente d'une action à exécuter...
 </div>
 
 <pre id="out" class="minibox">&nbsp;</pre>
@@ -128,7 +130,20 @@ function create()
           $('#message').attr('class', 'success');
           
           
-          //setTimeout(function() { printer(uid, data['password'], user, 'recovery'); }, 2000);
+          printer(uid, data['password'], 'recovery');
+        }
+        else if (data['status'] == 'created')
+        {
+          $('#message').html("Le compte a été créé.");
+          $('#message').attr('class', 'success');
+
+
+          printer(uid, data['password'], 'new');
+        }
+        else if (data['status'] == 'disabled')
+        {
+          $('#message').html("Action impossible pour un compte désactivé.");
+          $('#message').attr('class', 'error');
         }
         else
         {
@@ -231,7 +246,7 @@ function ldap(uid)
   }
 }
 
-function printer(uid, password, user, type)
+function printer(uid, password, type)
 {
   $('#message').html("Impression des informations de connexion en cours...");
   $('#message').attr('class', 'notification');
@@ -240,14 +255,14 @@ function printer(uid, password, user, type)
     dataType: "json",
     type: 'GET',
     url: 'api_printer.php',
-	  data: { uid: uid, password: password, givenname: user['givenname'], sn: user['sn'], type: type },
+	  data: { uid: uid, password: password, givenname: '', sn: '', type: type },
     success: function(data, textStatus, jqXHR)
     {
       $('#out').html(ObjectDump(data));
       
       if (data['status'] == 'success')
       {
-        $('#message').html("Impression du document. Vous pouvez récupérer votre carte.");
+        $('#message').html("Impression du document en cours.");
         $('#message').attr('class', 'success');
       }
       else

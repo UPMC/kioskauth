@@ -61,7 +61,17 @@ h2 {
 }
 
 .minibox {
-  border: 1px dotted #8BB0C9;
+  border: 1px dotted #B4CDDE;
   background-color: #E8F3FA;
   background-image: url(process.png);
+}
+
+.title {
+    padding: 30px;
+    color: #1d5987;
+    margin: 0 0 20px; 0;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #E8F3FA;
+    border-bottom: 1px solid #B4CDDE;
 }
