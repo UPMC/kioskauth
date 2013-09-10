@@ -1,7 +1,9 @@
 <?php
 
+# Supported cards ATR
 $atrs = array('3B66000090D1020140B1', '3B66000090D1020152B1', '3B690000AC04000004B18C6121');
 
+# Default answer
 $data = array('status' => 'error');
 
 $context = scard_establish_context();
@@ -9,7 +11,6 @@ $context = scard_establish_context();
 if (scard_is_valid_context($context))
 {
   $readers = scard_list_readers($context);
-  //$readers[0] = 'SCM Microsystems Inc. SCR35xx USB Smart Card Reader 0';
   
   if (is_array($readers) && count($readers) > 0)
   {
@@ -27,9 +28,7 @@ if (scard_is_valid_context($context))
       scard_transmit($connection, '00B201BC16');
       
       $uid = pack('H*', (substr(scard_transmit($connection, '00B204C43C'), 18, 14)));
-      
-      //$data = array('status' => 'success', 'uid' => 2900632); 
-      
+	  
       if (preg_match('#[^0-9]#', $uid) > 0 || (int)$uid === 0 || !in_array($card['ATR'], $atrs))
       {
         $data = array('status' => 'invalid');
@@ -41,6 +40,10 @@ if (scard_is_valid_context($context))
     }
     
     scard_disconnect($connection);
+  }
+  else
+  {
+    $data = array('status' => 'noreader');
   }
   
   scard_release_context($context);
