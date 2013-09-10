@@ -14,6 +14,12 @@ h2 {
   font-size: 14px;
 }
 
+fieldset {
+    border: 1px solid #E3E3E3;
+    padding: 10px 30px;
+    margin: 0px 0px 20px 0px;
+}
+
 #menu {
   background-color: #699DC7;
   padding: 10px;
@@ -67,11 +73,27 @@ h2 {
 }
 
 .title {
-    padding: 30px;
+    padding: 26px 40px;
     color: #1d5987;
-    margin: 0 0 20px; 0;
+    margin: 0 0 20px 0;
     font-weight: bold;
     font-size: 16px;
     background-color: #E8F3FA;
     border-bottom: 1px solid #B4CDDE;
+}
+
+.button {
+    border: 1px solid #ccc;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    top: 26px;
+    right: 40px;
+    background-color: #D6F0C9;
+}
+
+.button a {
+    font-size: 12px;
+    color: #666;
 }

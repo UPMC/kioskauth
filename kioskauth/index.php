@@ -11,8 +11,11 @@
 
 <body>
 
-<div class="title">KioskAuth &rsaquo; Tableau de bord</div>
-
+<div class="title">
+  <div>KioskAuth</div>
+  <div style="font-size: 12px">Tableau de bord</div>
+  <div class="button"><a href="kiosk.php">Lancer l'application Kiosk</a></div>
+</div>
 
 <div id="tabs">
   <ul>
@@ -20,6 +23,7 @@
     <li><a href="#enable">Activation de compte</a></li>
     <li><a href="#ldap">Profil étudiant</a></li>
     <li><a href="#analyse">Analyse de carte</a></li>
+    <li><a href="#config">Configuration</a></li>
   </ul>
   <div id="create">
     <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
@@ -47,6 +51,39 @@
   <div id="analyse">
     <h2>Insérez une carte étudiant à analyser.</h2>
     <p><input type="button" value="Analyser" onclick="analyse()" /></p>
+  </div>
+  <div id="config">
+    <fieldset>
+      <legend>Tableau de bord</legend>
+      <h2>Lecteur de carte</h2>
+      <p><select id="readersAdm"></select></p>
+      <h2>Imprimer vers</h2>
+      <p><select id="printersAdm"></select></p>
+      <table cellspacing="8">
+        <tr>
+          <td><input type="checkbox" checked="checked" id="ticketChk" /></td>
+          <td>
+            <label for="ticketChk">Utiliser le format ticket pour cette imprimante</label><br />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <fieldset>
+      <legend>Kiosk</legend>
+      <h2>Lecteur de carte</h2>
+      <p><select id="readersKiosk"></select></p>
+      <h2>Imprimer vers</h2>
+      <p><select id="printersKiosk"></select></p>
+      <table cellspacing="8">
+        <tr>
+          <td><input type="checkbox" checked="checked" id="ticketChk" /></td>
+          <td>
+            <label for="ticketChk">Utiliser le format ticket pour cette imprimante</label><br />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <p><input type="button" value="Enregistrer" onclick="config()" /></p>
   </div>
 </div>
 
@@ -133,17 +170,22 @@ function create()
         {
           $('#message').html("Le mot de passe a été réinitialisé.");
           $('#message').attr('class', 'success');
-          
-          
-          printer(uid, data['password'], 'recovery');
+
+          if ($('#printChk').is(":checked"))
+          {
+            printer(uid, data['password'], 'recovery');
+          }
         }
         else if (data['status'] == 'created')
         {
           $('#message').html("Le compte a été créé.");
           $('#message').attr('class', 'success');
 
+          if ($('#printChk').is(":checked"))
+          {
+            printer(uid, data['password'], 'new');
+          }
 
-          printer(uid, data['password'], 'new');
         }
         else if (data['status'] == 'disabled')
         {
@@ -331,6 +373,43 @@ function analyse()
   });
 }
 
+function config()
+{
+  alert("Cette fonction n'est pas encore implémentée. Actuellement, seul le premier lecteur de la liste est utilisé et seule l'imprimante par défaut est utilisée.");
+}
+
+function load()
+{
+  $.ajax({
+    dataType: "json",
+    type: 'GET',
+    url: 'api_config.php',
+    success: function(data, textStatus, jqXHR)
+    {
+      if (data['status'] == 'success')
+      {
+        $.each(data['readers'], function(index, value) {
+          $('#readersAdm').append(new Option(value, index, true, true));
+          $('#readersKiosk').append(new Option(value, index, true, true));
+        });
+
+        $.each(data['printers'], function(index, value) {
+          $('#printersAdm').append(new Option(value['NAME'], value['NAME'], true, true));
+          $('#printersKiosk').append(new Option(value['NAME'], value['NAME'], true, true));
+        });
+      }
+      else
+      {
+        // error
+      }
+    },
+    error: function()
+    {
+      // error
+    }
+  });
+}
+
 function ObjectDump(obj)
 {
   this.result = "";
@@ -362,6 +441,7 @@ function ObjectDump(obj)
 
 $(document).ready(function() {
   $( "#tabs" ).tabs();
+  load();
 });
 
 </script>
