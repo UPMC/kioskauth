@@ -3,8 +3,8 @@
 <head>
   <title>KioskAuth</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" type="text/css" href="static/web.css" />
-  <link rel="stylesheet" type="text/css" href="static/jquery/jquery-ui-1.10.2.custom.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/adm.css" />
+  <link rel="stylesheet" type="text/css" href="static/jquery/jquery-ui-1.10.2.custom.css" />
   <script type="text/javascript" src="static/jquery/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="static/jquery/jquery-ui-1.10.2.custom.min.js"></script>
 </head>
