@@ -10,7 +10,7 @@
 <body>
   <div id="header">
     <div id="title">KIOSK SERVICE D'AUTHENTIFICATION</div>
-	  <div id="subtitle">UFR 919</div>
+	<div id="subtitle">UFR 919</div>
   </div>
 </body>
 
