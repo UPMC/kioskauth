@@ -27,7 +27,7 @@
   </ul>
   <div id="create">
     <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
-    <p><input type="text" id="inCreate" /> <input type="button" value="Créer" onclick="create()" /></p>
+    <p><input type="text" id="inCreate" /> <input type="button" value="Créer" onclick="create()" /> &nbsp; <a href="#" onclick="$('#inCreate').val(''); create(); return event.preventDefault();">Effacer et créer</a></p>
 	<p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
     <table cellspacing="8">
       <tr>
@@ -40,12 +40,12 @@
   </div>
   <div id="enable">
     <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
-    <p><input type="text" id="inEnable" /> <input type="button" value="Activer" onclick="enable()" /></p>
+    <p><input type="text" id="inEnable" /> <input type="button" value="Activer" onclick="enable()" /> &nbsp; <a href="#" onclick="$('#inEnable').val(''); enable(); return event.preventDefault();">Effacer et activer</a></p>
     <p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
   </div>
   <div id="ldap">
     <h2>Saisissez un numéro étudiant ou insérez une carte.</h2>
-    <p><input type="text" id="inLdap" /> <input type="button" value="Afficher" onclick="ldap()" /></p>
+    <p><input type="text" id="inLdap" /> <input type="button" value="Afficher" onclick="ldap()" /> &nbsp; <a href="#" onclick="$('#inLdap').val(''); ldap(); return event.preventDefault();">Effacer et afficher</a></p>
     <p><span style="color: #bbb">Gardez le champs vide pour une saisie automatique par carte.</span></p>
   </div>
   <div id="analyse">
