@@ -36,12 +36,16 @@ if (scard_is_valid_context($context))
       $data['moneo'] = (int)substr($solde, 0, 4).','.substr($solde, 4, 2);
       
       $data['uid'] = pack('H*', (substr($data['anb']['00B204C43C'], 18, 14)));
+
+      scard_disconnect($connection);
     }
   }
   else
   {
     $data = array('status' => 'noreader');
   }
+
+  scard_release_context($context);
 }
 
 echo json_encode($data);

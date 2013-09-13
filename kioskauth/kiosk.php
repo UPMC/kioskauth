@@ -50,7 +50,7 @@ function reader()
       {
         $('#message').html('Insérez votre carte dans le lecteur.');
         $('#message').attr('class', 'notification');
-        $('#picture').attr('src', 'static/insert.gif');
+        $('#picture').attr('src', 'static/insert.png');
         
         setTimeout(function() { reader(); }, 1000);
       }
@@ -73,9 +73,12 @@ function reader()
     },
     error: function()
     {
-      $('#message').html('Erreur QueryReader, veuillez vous adresser au technicien.');
+      $('#message').html("Erreur QueryReader, redémarrage de l'application...");
       $('#message').attr('class', 'error');
       $('#picture').attr('src', 'static/bug.png');
+
+      /* En raison d'un grand nombre d'erreur 500 provoquées par scard_disconnect */
+      setTimeout(function() { location.reload(); }, 2000);
     }
   });
 }
@@ -161,6 +164,7 @@ function printer(uid, password, user, type)
       {
         $('#message').html("Exécution terminée. Récupérez votre carte.");
         $('#message').attr('class', 'success');
+        $('#picture').attr('src', 'static/remove.png');
       }
       else
       {
@@ -197,9 +201,12 @@ function remove()
     },
     error: function()
     {
-      $('#message').html('Erreur QueryReader, veuillez vous adresser au technicien.');
+      $('#message').html("Erreur QueryReader, redémarrage de l'application...");
       $('#message').attr('class', 'error');
       $('#picture').attr('src', 'static/bug.png');
+
+      /* En raison d'un grand nombre d'erreur 500 provoquées par scard_disconnect */
+      setTimeout(function() { location.reload(); }, 2000);
     }
   });
 }
