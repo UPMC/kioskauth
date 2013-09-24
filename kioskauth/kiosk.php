@@ -50,7 +50,9 @@ function reader()
       {
         $('#message').html('Insérez votre carte dans le lecteur.');
         $('#message').attr('class', 'notification');
-        $('#picture').attr('src', 'static/insert.gif');
+        if ($('#picture').attr('src') != 'static/insert.gif') {
+			$('#picture').attr('src', 'static/insert.gif');
+		}
         
         setTimeout(function() { reader(); }, 1000);
       }
@@ -164,7 +166,10 @@ function printer(uid, password, user, type)
       {
         $('#message').html("Exécution terminée. Récupérez votre carte.");
         $('#message').attr('class', 'success');
-        $('#picture').attr('src', 'static/remove.gif');
+		
+		if ($('#picture').attr('src') != 'static/remove.gif') {
+          $('#picture').attr('src', 'static/remove.gif');
+		}
       }
       else
       {
