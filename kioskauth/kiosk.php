@@ -12,22 +12,20 @@
     <div id="title">KIOSK SERVICE D'AUTHENTIFICATION</div>
 	<div id="subtitle">UFR 919</div>
   </div>
-</body>
 
+  <div class="minibox">
+    Créez votre compte informatique ou récupérez votre mot de passe.
+  </div>
 
-<div class="minibox">
-  Créez votre compte informatique ou récupérez votre mot de passe.
-</div>
+  <div style="width: 400px; margin: 0 auto; text-align: center; ">
+    <img src="static/bug.png" id="picture" />
+  </div>
 
-<div style="width: 400px; margin: 100px auto; text-align: center">
-  <img src="static/bug.png" id="picture" />
-</div>
+  <div id="message" class="error">
+    Kiosk hors service, veuillez vous adresser au technicien.
+  </div>
 
-<div id="message" class="error">
-  Kiosk hors service, veuillez vous adresser au technicien.
-</div>
-
-<script type="text/javascript">
+  <script type="text/javascript">
 
 function reader()
 {
@@ -220,7 +218,7 @@ $(document).ready(function() {
   reader();
 });
 
-</script>
+  </script>
 
 </body>
 </html>
