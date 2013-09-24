@@ -27,14 +27,14 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_select_font($printer, $fontB);
       
-      printer_draw_text($printer, (string)$_GET['password'], 2600+$x, 2140+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['password']), 2600+$x, 2140+$y);
       printer_draw_text($printer, (date('Y')+$offset).'/'.(date('Y')+$offset+1), 3150+$x, 4114+$y);
       
       printer_select_font($printer, $fontL);
       
-      printer_draw_text($printer, (string)$_GET['sn'], 1545+$x, 4724+$y);
-      printer_draw_text($printer, (string)$_GET['givenname'], 1545+$x, 4904+$y);
-      printer_draw_text($printer, (string)$_GET['uid'], 1545+$x, 5084+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['sn']), 1545+$x, 4724+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['givenname']), 1545+$x, 4904+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['uid']), 1545+$x, 5084+$y);
       printer_draw_text($printer, date('d/m/Y'), 2985+$x, 5840+$y);
       
       printer_end_page($printer);
@@ -49,7 +49,7 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_select_font($printer, $fontB);
       
-      printer_draw_text($printer, (string)$_GET['password'], 2600+$x, 2140+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['password']), 2600+$x, 2140+$y);
       
       printer_end_page($printer);
       printer_end_doc($printer);

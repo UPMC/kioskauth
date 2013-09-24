@@ -28,7 +28,7 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_select_font($printer, $fontB);
       
-      printer_draw_text($printer, (string)$_GET['password'], 325+$x, 375+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['password']), 325+$x, 375+$y);
       
       printer_end_page($printer);
       printer_start_page($printer);
@@ -41,8 +41,8 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_select_font($printer, $fontL);
       
-      printer_draw_text($printer, (string)$_GET['sn'].' '.(string)$_GET['givenname'], 12+$x, 170+$y);
-      printer_draw_text($printer, (string)$_GET['uid'], 214+$x, 240+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['sn'].' '.(string)$_GET['givenname']), 12+$x, 170+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['uid']), 214+$x, 240+$y);
       printer_draw_text($printer, date('d/m/Y'), 126+$x, 456+$y);
       
       printer_draw_text($printer, '.', 0+$x, 700+$y); # Spacer pour la signature
@@ -59,7 +59,7 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_select_font($printer, $fontB);
       
-      printer_draw_text($printer, (string)$_GET['password'], 325+$x, 375+$y);
+      printer_draw_text($printer, utf8_decode((string)$_GET['password']), 325+$x, 375+$y);
       
       printer_end_page($printer);
       printer_end_doc($printer);
