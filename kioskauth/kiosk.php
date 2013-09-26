@@ -24,7 +24,7 @@
   <div id="message" class="error">
     Kiosk hors service, veuillez vous adresser au technicien.
   </div>
-<div id="dummy"></div>
+<div id="dummy" style="height:0;"></div>
   <script type="text/javascript">
 
 function reader()
