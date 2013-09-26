@@ -24,7 +24,7 @@
   <div id="message" class="error">
     Kiosk hors service, veuillez vous adresser au technicien.
   </div>
-
+<div id="dummy"></div>
   <script type="text/javascript">
 
 function reader()
@@ -163,7 +163,8 @@ function printer(uid, password, user, type)
       if (data['status'] == 'success')
       {
         $('#message').html("Exécution terminée. Récupérez votre carte.");
-        $('#message').attr('class', 'success');
+        $('#message').attr('class', 'success');		
+		player();
 		
 		if ($('#picture').attr('src') != 'static/remove.gif') {
           $('#picture').attr('src', 'static/remove.gif');
@@ -212,6 +213,11 @@ function remove()
       setTimeout(function() { location.reload(); }, 2000);
     }
   });
+}
+
+function player()
+{
+	document.getElementById("dummy").innerHTML='<audio autoplay ><source src="static/retour_coupon.wav" type="audio/Wav"></audio>';
 }
 
 $(document).ready(function() {
