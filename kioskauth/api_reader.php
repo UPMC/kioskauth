@@ -1,7 +1,12 @@
 <?php
 
 # Supported cards ATR
-$atrs = array('3B66000090D1020140B1', '3B66000090D1020152B1', '3B690000AC04000004B18C6121');
+$atrs = array(
+  '3B66000090D1020140B1',
+  '3B66000090D1020152B1',
+  '3B6600000512010101B1',
+  '3B690000AC04000004B18C6121'
+);
 
 # Default answer
 $data = array('status' => 'error');
