@@ -24,7 +24,7 @@
   <div id="message" class="error">
     Kiosk hors service, veuillez vous adresser au technicien.
   </div>
-<div id="dummy" style="height:0;"></div>
+
   <script type="text/javascript">
 
 function reader()
@@ -48,8 +48,10 @@ function reader()
       {
         $('#message').html('Insérez votre carte dans le lecteur.');
         $('#message').attr('class', 'notification');
-        if ($('#picture').attr('src') != 'static/insert.gif') {
-			$('#picture').attr('src', 'static/insert.gif');
+
+        if ($('#picture').attr('src') != 'static/insert.gif')
+        {
+		  $('#picture').attr('src', 'static/insert.gif');
 		}
         
         setTimeout(function() { reader(); }, 1000);
@@ -157,18 +159,14 @@ function printer(uid, password, user, type)
     dataType: "json",
     type: 'GET',
     url: 'api_receipt.php',
-	  data: { uid: uid, password: password, givenname: user['givenname'], sn: user['sn'], type: type },
+	data: { uid: uid, password: password, givenname: user['givenname'], sn: user['sn'], type: type },
     success: function(data, textStatus, jqXHR)
     {
       if (data['status'] == 'success')
       {
         $('#message').html("Exécution terminée. Récupérez votre carte.");
-        $('#message').attr('class', 'success');		
-		player();
-		
-		if ($('#picture').attr('src') != 'static/remove.gif') {
-          $('#picture').attr('src', 'static/remove.gif');
-		}
+        $('#message').attr('class', 'success');
+		$('#picture').attr('src', 'static/remove.gif');
       }
       else
       {
@@ -213,11 +211,6 @@ function remove()
       setTimeout(function() { location.reload(); }, 2000);
     }
   });
-}
-
-function player()
-{
-	document.getElementById("dummy").innerHTML='<audio autoplay ><source src="static/retour_coupon.wav" type="audio/Wav"></audio>';
 }
 
 $(document).ready(function() {
