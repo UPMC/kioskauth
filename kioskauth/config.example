@@ -1,5 +1,7 @@
 <?php
 
+# Admin config
+
 define('sshHostname', 'authserv.upmc.fr');
 define('sshUsername', 'admin');
 define('sshPassword', 'password');
@@ -9,3 +11,24 @@ define('ldapPort', 389);
 define('ldapSearchDn', 'ou=People,dc=upmc,dc=fr');
 define('ldapAuthUser', 'uid=kioskauth,ou=Machines,dc=upmc,dc=fr');
 define('ldapAuthPassword', 'password');
+
+# Default user config
+# Could be overwritten by the user interface through the config.ini file
+
+$__user = array(
+  'userDashboardReader' => null,
+  'userDashboardPrinter' => null,
+  'userDashboardReceipt' => false,
+  'userKioskReader' => null,
+  'userKioskPrinter' => null,
+  'userKioskReceipt' => true,
+);
+
+require_once 'helpers.php';
+
+$__ini = getConfigIni('config.ini');
+
+foreach ($__user as $key => $value)
+{
+  (isset($__ini[$key])) ? define($key, $__ini[$key]) : define($key, $value);
+}
