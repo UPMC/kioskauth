@@ -1,5 +1,7 @@
 <?php
 
+require_once 'config.php';
+
 $data = array('status' => 'error');
 
 $context = scard_establish_context();
