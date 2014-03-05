@@ -4,7 +4,7 @@ function reader()
   var uid = '';
   
   $.ajax({
-    dataType: "json",
+    dataType: 'json',
     type: 'GET',
     url: 'api_reader.php',
     async: false,
@@ -62,7 +62,7 @@ function create()
   if (uid != '')
   {
     $.ajax({
-      dataType: "json",
+      dataType: 'json',
       type: 'GET',
       url: 'api_create.php',
       data: { uid: uid },
@@ -127,7 +127,7 @@ function enable()
   if (uid != '')
   {
     $.ajax({
-      dataType: "json",
+      dataType: 'json',
       type: 'GET',
       url: 'api_enable.php',
       data: { uid: uid },
@@ -170,7 +170,7 @@ function ldap(uid)
   if (uid != '')
   {
     $.ajax({
-      dataType: "json",
+      dataType: 'json',
       type: 'GET',
       url: 'api_ldap.php',
       data: { uid: uid },
@@ -204,7 +204,7 @@ function printer(uid, password, type)
   $('#message').attr('class', 'notification');
   
   $.ajax({
-    dataType: "json",
+    dataType: 'json',
     type: 'GET',
     url: 'api_printer.php',
 	  data: { uid: uid, password: password, givenname: '', sn: '', type: type },
@@ -237,7 +237,7 @@ function analyse()
   $('#message').attr('class', 'notification');
   
   $.ajax({
-    dataType: "json",
+    dataType: 'json',
     type: 'GET',
     url: 'api_analyse.php',
     success: function(data, textStatus, jqXHR)
@@ -288,7 +288,7 @@ function config()
 function load()
 {
   $.ajax({
-    dataType: "json",
+    dataType: 'json',
     type: 'GET',
     url: 'api_config.php',
     success: function(data, textStatus, jqXHR)
@@ -329,14 +329,16 @@ function execute()
     addConsole("execute() lance l'action enable()");
     enable();
   }
-  if (selected == 'ldap') {
+  else if (selected == 'ldap') {
     addConsole("execute() lance l'action ldap()");
     ldap();
   }
-  if (selected == 'analyse') {
+  else if (selected == 'analyse') {
     addConsole("execute() lance l'action analyse()");
     analyse();
   }
+  
+  $('#uid').select();
 }
 
 function ObjectDump(obj)
@@ -346,26 +348,26 @@ function ObjectDump(obj)
  
   this.dumpLayer = function(obj)
   {
-    this.indent += 2;
+    this.indent += 29;
  
     for (var i in obj)
     {
       if (typeof(obj[i]) == "object")
       {
-        this.result += "              ".substring(0,this.indent)+i+": "+"\n";
+        this.result += "                            ".substring(0,this.indent)+i+": "+"\n";
         this.dumpLayer(obj[i]);
       }
       else
       {
-        this.result += "              ".substring(0,this.indent)+i+": "+obj[i]+"\n";
+        this.result += "                            ".substring(0,this.indent)+i+": "+obj[i]+"\n";
       }
     }
     
-    this.indent -= 2;
+    this.indent -= 29;
   }
   
   this.dumpLayer(obj);
-  return this.result;
+  return this.result.slice(27).slice(0, -2);
 }
 
 function addConsole(row) {

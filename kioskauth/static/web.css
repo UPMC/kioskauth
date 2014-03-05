@@ -91,17 +91,18 @@ section {
   width: 160px;
 }
 
-#button {
-  text-align: center;
+#version {
   padding: 10px 30px;
   position: absolute;
-  top: 26px;
+  top: 20px;
   right: 40px;
   background-color: #323d58;
-  display: block;
+  color: #fff;
+}
+
+#version a {
   color: #fff;
   text-decoration: none;
-  font-weight: bold;
 }
 
 #fancy {

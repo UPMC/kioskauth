@@ -13,7 +13,10 @@
     <header>
       <h1>KioskAuth</h1>
       <h2>Tableau de bord</h2>
-      <a href="kiosk.php" id="button">Lancer l'application Kiosk</a>
+      <div id="version">
+        <div>Logiciel initié par la <a href="https://www.ppi.ingenierie.upmc.fr/">PPI</a> de l'<a href="http://www.upmc.fr/">UPMC</a></div>
+        <div style="color: #aaa">revision <?php echo substr(@file_get_contents('../.git/refs/heads/master'), 0, 10) ?></div>
+      </div>
     </header>
     
     <section>
