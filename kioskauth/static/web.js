@@ -8,9 +8,10 @@ function reader()
     type: 'GET',
     url: 'api_reader.php',
     async: false,
+    complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
     success: function(data, textStatus, jqXHR)
     {
-      addConsole(ObjectDump(data));
+      addConsole(readObject(data));
       
       if (data['status'] == 'success')
       {
@@ -66,9 +67,10 @@ function create()
       type: 'GET',
       url: 'api_create.php',
       data: { uid: uid },
+      complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
       success: function(data, textStatus, jqXHR)
       {
-        addConsole(ObjectDump(data));
+        addConsole(readObject(data));
         
         if (data['status'] == 'enabled')
         {
@@ -131,9 +133,10 @@ function enable()
       type: 'GET',
       url: 'api_enable.php',
       data: { uid: uid },
+      complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
       success: function(data, textStatus, jqXHR)
       {
-        addConsole(ObjectDump(data));
+        addConsole(readObject(data));
         
         if (data['status'] == 'success')
         {
@@ -174,9 +177,10 @@ function ldap(uid)
       type: 'GET',
       url: 'api_ldap.php',
       data: { uid: uid },
+      complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
       success: function(data, textStatus, jqXHR)
       {
-        addConsole(ObjectDump(data));
+        addConsole(readObject(data));
         
         if (data['status'] == 'success')
         {
@@ -210,7 +214,7 @@ function printer(uid, password, type)
 	  data: { uid: uid, password: password, givenname: '', sn: '', type: type },
     success: function(data, textStatus, jqXHR)
     {
-      addConsole(ObjectDump(data));
+      addConsole(readObject(data));
       
       if (data['status'] == 'success')
       {
@@ -240,10 +244,10 @@ function analyse()
     dataType: 'json',
     type: 'GET',
     url: 'api_analyse.php',
+    complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
     success: function(data, textStatus, jqXHR)
     {
-      addConsole("analyse() exécuté avec succès, ObjectDump() des données :");
-      addConsole(ObjectDump(data));
+      addConsole(readObject(data));
       
 	    if (data['status'] == 'success')
       {
@@ -272,7 +276,7 @@ function analyse()
 		    $('#message').attr('class', 'error');
 	    }
 	  },
-    error: function()
+    error: function(jqXHR, textStatus, errorThrown)
     {
       $('#message').html("Erreur QueryAnalyse : impossible de récupérer les données de la carte.");
       $('#message').attr('class', 'error');
@@ -282,15 +286,11 @@ function analyse()
 
 function config()
 {
-  alert("Cette fonction n'est pas encore implémentée. Actuellement, seul le premier lecteur de la liste est utilisé et seule l'imprimante par défaut est utilisée.");
-}
-
-function load()
-{
   $.ajax({
     dataType: 'json',
     type: 'GET',
     url: 'api_config.php',
+    complete: function(jqXHR, textStatus) { addConsole(readObject(jqXHR)); },
     success: function(data, textStatus, jqXHR)
     {
       if (data['status'] == 'success')
@@ -305,15 +305,7 @@ function load()
           $('#printersKiosk').append(new Option(value['NAME'], value['NAME'], true, true));
         });
       }
-      else
-      {
-        // error
-      }
     },
-    error: function()
-    {
-      // error
-    }
   });
 }
 
@@ -341,11 +333,11 @@ function execute()
   $('#uid').select();
 }
 
-function ObjectDump(obj)
+function readObject(obj)
 {
   this.result = "";
   this.indent = -2;
- 
+  
   this.dumpLayer = function(obj)
   {
     this.indent += 29;
@@ -367,21 +359,20 @@ function ObjectDump(obj)
   }
   
   this.dumpLayer(obj);
-  return this.result.slice(27).slice(0, -2);
+  return this.result.slice(27).slice(0, -1);
 }
 
-function addConsole(row) {
+function addConsole(row)
+{
   d = new Date();
-  
   $('#console').append(d.toISOString()+" # "+row+"\n");
-  //$('#console').scrollBottom();
 }
 
-function bindActionClick()
+function actionClick()
 {
   selected = $('input:radio[name=action]:checked').val();
   
-  addConsole("nouvelle action sélectionnée : "+selected);
+  addConsole("action modifiée : "+selected);
     
   if (selected == 'analyse') {
     $('#uid').attr('disabled', 'disabled');
@@ -390,23 +381,3 @@ function bindActionClick()
     $('#uid').removeAttr('disabled');
   }
 }
-
-function bindUidKeypress(e)
-{
-  if (e.which == 13) {
-    execute();
-    return false;
-  }
-}
-
-$(document).ready(function() {
-
-  $('input:radio[name=action]').change(function() { bindActionClick() });
-  $('#execute').click(function() { execute() });
-  $('#uid').keypress(function(e) { return bindUidKeypress(e) });
-  $('#close').click(function() { $('#fancy').toggle() });
-  
-  load();
-  
-  addConsole("nouvelle instance de l'application");
-});

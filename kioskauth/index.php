@@ -21,38 +21,38 @@
     
     <section>
     
-      <div id="message" class="notification">En attente d'une action à exécuter...</div>
+      <div id="message" class="success">L'application est prête.</div>
     
       <div class="box">
       
         <h3>Numéro de l'étudiant</h3>
       
         <p>
-          <input type="text" id="uid" /> <input type="button" value="Exécuter" id="execute" /> <br />
+          <input type="text" id="uid" /> <input type="button" value="Exécuter" onclick="execute()" /> <br />
           <span style="color: #bbb">Vous pouvez également utiliser le lecteur ou le scanner.</span>
         </p>
         
         <h3>Choix de l'action à exécuter</h3>
 
-      <p>
-        <input type="radio" name="action" value="create" id="create" checked="checked" />
-        <label for="create">Créer un compte ou réinitialiser le mot de passe</label>
-      </p>
-      
-      <p>
-        <input type="radio" name="action" value="enable" id="enable" />
-        <label for="enable">Activer un compte</label>
-      </p>
-      
-      <p>
-        <input type="radio" name="action" value="ldap" id="ldap" />
-        <label for="ldap">Afficher un profil étudiant depuis l'annuaire</label>
-      </p>
-      
-      <p>
-        <input type="radio" name="action" value="analyse" id="analyse" />
-        <label for="analyse">Analyser une carte</label>
-      </p>
+        <p>
+          <input type="radio" name="action" value="create" id="create" checked="checked" />
+          <label for="create">Créer un compte ou réinitialiser le mot de passe</label>
+        </p>
+        
+        <p>
+          <input type="radio" name="action" value="enable" id="enable" />
+          <label for="enable">Activer un compte</label>
+        </p>
+        
+        <p>
+          <input type="radio" name="action" value="ldap" id="ldap" />
+          <label for="ldap">Afficher un profil étudiant depuis l'annuaire</label>
+        </p>
+        
+        <p>
+          <input type="radio" name="action" value="analyse" id="analyse" />
+          <label for="analyse">Analyser une carte</label>
+        </p>
       
       </div>
       
@@ -66,7 +66,7 @@
         </p>
         
         <p>
-          <a onclick="$('#fancy').toggle()">Configuration</a> <br />
+          <a onclick="config(); $('#fancy').toggle();">Configuration</a> <br />
           <span style="color: #bbb">Paramètres utilisateur de l'application.</span>
         </p>
         
@@ -81,51 +81,70 @@
       
     </section>
 
-
-      <div id="fancy">
-        <div>
-          <fieldset>
-            <legend>Tableau de bord</legend>
-            
-            <h2>Lecteur de carte</h2>
-            <p><select id="readersAdm"></select></p>
-            
-            <h2>Imprimer vers</h2>
-            <p><select id="printersAdm"></select></p>
-            
-            <p>
-              <input type="checkbox" checked="checked" id="userDashboardReceipt" />
-              <label for="userDashboardReceipt">Utiliser le format ticket pour cette imprimante</label>
-            </p>
-            
-          </fieldset>
+    <div id="fancy">
+      <div>
+      
+        <fieldset>
+          <legend>Tableau de bord</legend>
           
-          <fieldset>
-            <legend>Kiosk</legend>
-            
-            <h2>Lecteur de carte</h2>
-            <p><select id="readersKiosk"></select></p>
-            
-            <h2>Imprimer vers</h2>
-            <p><select id="printersKiosk"></select></p>
-            
-            <p>
-              <input type="checkbox" checked="checked" id="userKioskReceipt" />
-              <label for="userKioskReceipt">Utiliser le format ticket pour cette imprimante</label>
-            </p>
+          <h2>Lecteur de carte</h2>
+          <p><select id="readersAdm"></select></p>
           
-          </fieldset>
+          <h2>Imprimer vers</h2>
+          <p><select id="printersAdm"></select></p>
           
           <p>
-            <input type="button" value="Enregistrer" onclick="config()" />
-            <input type="button" value="Fermer" id="close" />
+            <input type="checkbox" checked="checked" id="userDashboardReceipt" />
+            <label for="userDashboardReceipt">Utiliser le format ticket pour cette imprimante</label>
           </p>
+          
+        </fieldset>
+        
+        <fieldset>
+          <legend>Kiosk</legend>
+          
+          <h2>Lecteur de carte</h2>
+          <p><select id="readersKiosk"></select></p>
+          
+          <h2>Imprimer vers</h2>
+          <p><select id="printersKiosk"></select></p>
+          
+          <p>
+            <input type="checkbox" checked="checked" id="userKioskReceipt" />
+            <label for="userKioskReceipt">Utiliser le format ticket pour cette imprimante</label>
+          </p>
+        
+        </fieldset>
+        
+        <p>
+          <input type="button" value="Enregistrer" onclick="config()" />
+          <input type="button" value="Fermer" onclick="$('#fancy').toggle()" />
+        </p>
+        
       </div>
     </div>
-
     
     <script src="static/jquery-1.11.0.min.js"></script>
     <script src="static/web.js"></script>
+    
+    <script>
+    
+    $(document).ready(function()
+    {
+      $('input:radio[name=action]').change(function() {
+        actionClick();
+      });
+      
+      $('#uid').keypress(function(e) {
+        if (e.which == 13) {
+          execute();
+        }
+      });
+      
+      addConsole("nouvelle instance de l'application");
+    });
+    
+    </script>
   
   </body>
 </html>

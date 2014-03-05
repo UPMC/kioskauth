@@ -28,25 +28,16 @@ a {
 }
 
 header {
-    padding: 23px 0 30px 100px;
-    color: #323d58;
-    background-color: #E8F3FA;
-    background-image: url(kioskauth.png);
-    background-repeat: no-repeat;
-    background-position: 40px 22px;
+  padding: 23px 0 30px 100px;
+  color: #323d58;
+  background-color: #E8F3FA;
+  background-image: url(kioskauth.png);
+  background-repeat: no-repeat;
+  background-position: 40px 22px;
 }
 
 section {
   margin: 20px 40px;
-}
-
-.notification {
-  color: #777777;
-  background-color: #FCF5CC;
-  background-image: url(notification.png);
-  padding: 16px 10px 16px 70px;
-  background-repeat: no-repeat;
-  background-position: 20px 8px;
 }
 
 .success {
@@ -72,10 +63,9 @@ section {
   background-image: url(process.png);
   padding: 10px 10px 10px 70px;
   background-repeat: no-repeat;
-  background-position: 20px 8px;
+  background-position: 20px 4px;
   display: none;
   overflow-x: hidden;
-  height: 300px;
   border-top: 10px solid #E8F3FA;
   border-bottom: 10px solid #E8F3FA;
   clear: both;
@@ -121,4 +111,3 @@ section {
   width: 600px;
   padding: 20px;
 }
-
