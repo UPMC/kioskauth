@@ -43,38 +43,28 @@ section {
 .success {
   color: #425C2F;
   background-color: #D6F0C9;
-  background-image: url(success.png);
-  padding: 16px 10px 16px 70px;
-  background-repeat: no-repeat;
-  background-position: 20px 8px;
+  padding: 20px;
 }
 
 .error {
   color: #E63232;
   background-color: #F7D7D7;
-  background-image: url(error.png);
-  padding: 16px 10px 16px 70px;
-  background-repeat: no-repeat;
-  background-position: 20px 8px;
+  padding: 20px;
 }
 
 #console {
   background-color: #E8F3FA;
-  background-image: url(process.png);
-  padding: 10px 10px 10px 70px;
-  background-repeat: no-repeat;
-  background-position: 20px 4px;
+  padding: 20px;
   display: none;
   overflow-x: hidden;
-  border-top: 10px solid #E8F3FA;
-  border-bottom: 10px solid #E8F3FA;
   clear: both;
+  height: 300px;
 }
 
 .box {
   float: left;
   width: 420px;
-  margin: 20px 7%;
+  margin: 0 7% 20px 7%;
 }
 
 #uid {
