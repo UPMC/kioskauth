@@ -1,3 +1,0 @@
-<IfModule mod_php5.c>
-    php_value display_errors off
-</IfModule>

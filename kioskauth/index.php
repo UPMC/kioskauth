@@ -22,52 +22,56 @@
     
       <div class="box">
       
-        <h3>Saisissez un numéro étudiant ou insérez une carte</h3>
+        <h3>Numéro de l'étudiant</h3>
       
         <p>
-          <input type="text" id="uid" /> <input type="button" value="Exécuter" id="execute" />
+          <input type="text" id="uid" /> <input type="button" value="Exécuter" id="execute" /> <br />
+          <span style="color: #bbb">Vous pouvez également utiliser le lecteur ou le scanner.</span>
         </p>
         
-        <p>
-          &nbsp;
-        </p>
-        
-        <p>
-          <a onclick="$('#fancy').toggle()">Configuration</a> <br />
-          <span style="color: #bbb">Paramètres utilisateur de l'application</span>
-        </p>
-        
-        <p>
-          <a onclick="$('#console').toggle()">Console</a> <br />
-          <span style="color: #bbb">Ouvrir la console du développeur</span>
-        </p>
-      
-      </div>
-      
-      <div class="box">
-    
         <h3>Choix de l'action à exécuter</h3>
 
       <p>
         <input type="radio" name="action" value="create" id="create" checked="checked" />
-        <label for="create">Création de compte / Réinitialisation du mot de passe</label>
+        <label for="create">Créer un compte ou réinitialiser le mot de passe</label>
       </p>
       
       <p>
         <input type="radio" name="action" value="enable" id="enable" />
-        <label for="enable">Activation de compte</label>
+        <label for="enable">Activer un compte</label>
       </p>
       
       <p>
         <input type="radio" name="action" value="ldap" id="ldap" />
-        <label for="ldap">Profil étudiant</label>
+        <label for="ldap">Afficher un profil étudiant depuis l'annuaire</label>
       </p>
       
       <p>
         <input type="radio" name="action" value="analyse" id="analyse" />
-        <label for="analyse">Analyse de carte</label>
+        <label for="analyse">Analyser une carte</label>
       </p>
       
+      </div>
+      
+      <div class="box">
+      
+        <h3>Options de l'application</h3>
+        
+        <p>
+          <a href="kiosk.php">Kiosk</a> <br />
+          <span style="color: #bbb">Lancer l'application en mode autonome.</span>
+        </p>
+        
+        <p>
+          <a onclick="$('#fancy').toggle()">Configuration</a> <br />
+          <span style="color: #bbb">Paramètres utilisateur de l'application.</span>
+        </p>
+        
+        <p>
+          <a onclick="$('#console').toggle()">Console</a> <br />
+          <span style="color: #bbb">Ouvrir la console du développeur.</span>
+        </p>
+        
       </div>
       
       <pre id="console"></pre>
