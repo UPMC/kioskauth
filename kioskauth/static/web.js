@@ -76,22 +76,15 @@ function create()
         {
           $('#message').html("Le mot de passe a été réinitialisé.");
           $('#message').attr('class', 'success');
-
-          if ($('#printChk').is(":checked"))
-          {
-            printer(uid, data['password'], 'recovery');
-          }
+          
+          printer(uid, data['password'], 'recovery');
         }
         else if (data['status'] == 'created')
         {
           $('#message').html("Le compte a été créé.");
           $('#message').attr('class', 'success');
-
-          if ($('#printChk').is(":checked"))
-          {
-            printer(uid, data['password'], 'new');
-          }
-
+          
+          printer(uid, data['password'], 'new');
         }
         else if (data['status'] == 'disabled')
         {

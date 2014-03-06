@@ -18,6 +18,10 @@ section {
   text-align: center;
 }
 
+#wrapper {
+  height: 100px;
+}
+
 .notification {
   color: #555;
   background-color: #FCF5CC;

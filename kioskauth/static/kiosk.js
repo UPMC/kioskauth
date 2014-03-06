@@ -9,21 +9,36 @@
  */
 function message(message, status, image)
 {
-  $('#message').html(message);
+  if ($('#message').html() != message || $('#message').attr('class') != status)
+  {
+    $('#message').slideUp('slow', function()
+    {
+      $('#message').html(message);
+    
+      if (status == 'notification') {
+        $('#message').attr('class', 'notification');
+      }
+      else if (status == 'success') {
+        $('#message').attr('class', 'success');
+      }
+      else if (status == 'error') {
+        $('#message').attr('class', 'error');
+      }
+      
+      $('#message').slideDown('slow');
+    });
+  }
   
-  if (status == 'notification') {
-    $('#message').attr('class', 'notification');
-  }
-  else if (status == 'success') {
-    $('#message').attr('class', 'success');
-  }
-  else if (status == 'error') {
-    $('#message').attr('class', 'error');
-  }
-  
-  if (image != '') {
-    if ($('#picture').attr('src') != 'static/'+image) {
-      $('#picture').attr('src', 'static/'+image);
+  if (image != '')
+  {
+    
+    if ($('#picture').attr('src') != 'static/'+image)
+    {
+      $('#picture').fadeOut('slow', function()
+      {
+        $('#picture').attr('src', 'static/'+image);
+        $('#picture').fadeIn('slow');
+      });
     }
   }
 }

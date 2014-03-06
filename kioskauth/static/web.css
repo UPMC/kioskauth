@@ -40,6 +40,12 @@ section {
   margin: 20px 40px;
 }
 
+.notification {
+  color: #555;
+  background-color: #FCF5CC;
+  padding: 20px;
+}
+
 .success {
   color: #425C2F;
   background-color: #D6F0C9;

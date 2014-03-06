@@ -11,13 +11,15 @@
   
     <header>Kiosk Service d'Authentification</header>
     
-    <div id="message" class="error">Kiosk hors service, veuillez vous adresser au technicien</div>
+    <div id="wrapper">
+      <div id="message" class="error">Kiosk hors service, veuillez vous adresser au technicien</div>
+    </div>
 
     <section>
       <img src="static/bug.png" id="picture" alt="Picture" />
     </section>
     
-    <div id="screensaver"><img src="static/screensaver.png" alt="Screensaver" id="ssimg" /></div>
+    <div id="screensaver"><img src="static/screensaver.png" alt="Screensaver" /></div>
     
     <script src="static/jquery-1.11.0.min.js"></script>
     <script src="static/kiosk.js"></script>
@@ -26,9 +28,9 @@
 
       $(document).ready(function() {
         reader();
-        ss = setInterval(screensaver, 5000);
+        //ss = setInterval(screensaver, 5000);
       });
-
+      
     </script>
   
   </body>
