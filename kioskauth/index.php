@@ -21,7 +21,7 @@
     
     <section>
     
-      <div id="message" class="success">L'application est prête.</div>
+      <div id="message" class="notification">L'application est prête.</div>
     
       <div class="box">
       
