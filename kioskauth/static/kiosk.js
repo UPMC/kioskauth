@@ -7,22 +7,16 @@
  * @param image string
  * @return void
  */
-function message(message, status, image)
+function message(message, css, image)
 {
-  if ($('#message').html() != message || $('#message').attr('class') != status)
+  if ($('#message').html() != message || $('#message').attr('class') != css)
   {
     $('#message').slideUp('slow', function()
     {
       $('#message').html(message);
-    
-      if (status == 'notification') {
-        $('#message').attr('class', 'notification');
-      }
-      else if (status == 'success') {
-        $('#message').attr('class', 'success');
-      }
-      else if (status == 'error') {
-        $('#message').attr('class', 'error');
+      
+      if (css != '') {
+        $('#message').attr('class', css);
       }
       
       $('#message').slideDown('slow');
@@ -31,7 +25,6 @@ function message(message, status, image)
   
   if (image != '')
   {
-    
     if ($('#picture').attr('src') != 'static/'+image)
     {
       $('#picture').fadeOut('slow', function()
@@ -50,7 +43,7 @@ function message(message, status, image)
  * @return void
  */
 function reader()
-{
+{    
   $.ajax({
     dataType: 'json',
     type: 'GET',
@@ -59,19 +52,32 @@ function reader()
     {
       if (data['status'] == 'success') {
         message("Exécution en cours...", 'notification', 'loader.gif');
+        $("#screensaver").fadeOut();
         ldap(data['uid']);
         remove();
       }
-      else if (data['status'] == 'nocard') {
-        message("Insérez votre carte dans le lecteur avec tendresse", 'notification', 'insert.gif');
+      else if (data['status'] == 'nocard')
+      {
+        message("Insérez votre carte étudiant dans le lecteur", 'notification', 'insert.gif');
+        
+        if (ssDelay > 0) {
+          ssDelay--;
+        }
+        else {
+          $("#screensaver").fadeIn('slow');
+          screensaver();
+        }
+        
         setTimeout(function() { reader(); }, 1000);
       }
       else if (data['status'] == 'invalid') {
         message("Carte non supportée, récupérez votre carte", 'error', 'bug.png');
+        $("#screensaver").fadeOut();
         remove();
       }
       else {
         message("Erreur ApiReader, veuillez vous adresser au technicien", 'error', 'bug.png');
+        $("#screensaver").fadeOut();
         remove();
       }
     },
@@ -79,6 +85,7 @@ function reader()
     {
       /* En raison d'un grand nombre d'erreur 500 provoquées par scard_disconnect */
       message("Erreur jQuery_ApiReader, tentative de redémarrage de l'application...", 'error', 'bug.png');
+      ssCountDown = ssDelay;
       setTimeout(function() { location.reload(); }, 2000);
     }
   });
@@ -220,13 +227,10 @@ function screensaver()
 {
   image = $("#screensaver img");
   
-  image.fadeOut(500, function() {
-    maxLeft = $(window).width() - image.width();
-    maxTop = $(window).height() - image.height();
-    leftPos = Math.floor(Math.random() * (maxLeft + 1));
-    topPos = Math.floor(Math.random() * (maxTop + 1));
-    image.css({ left: leftPos, top: topPos }).fadeIn(200);
-  });
-    
-  //clearInterval(ss);
+  maxLeft = $(window).width() - image.width();
+  maxTop = $(window).height() - image.height();
+  leftPos = Math.floor(Math.random() * (maxLeft + 1));
+  topPos = Math.floor(Math.random() * (maxTop + 1));
+  
+  image.css({ left: leftPos, top: topPos });
 }

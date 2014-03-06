@@ -12,11 +12,11 @@
     <header>Kiosk Service d'Authentification</header>
     
     <div id="wrapper">
-      <div id="message" class="error">Kiosk hors service, veuillez vous adresser au technicien</div>
+      <div id="message" class="notification">Initialisation...</div>
     </div>
-
+    
     <section>
-      <img src="static/bug.png" id="picture" alt="Picture" />
+      <img src="static/loader.gif" id="picture" alt="Picture" />
     </section>
     
     <div id="screensaver"><img src="static/screensaver.png" alt="Screensaver" /></div>
@@ -27,8 +27,15 @@
     <script>
 
       $(document).ready(function() {
+      
+        ssDelay = 60;
         reader();
-        //ss = setInterval(screensaver, 5000);
+        
+        $(document).mousemove(function() {
+          $('#screensaver').fadeOut(0);
+          ssDelay = 60;
+        });
+        
       });
       
     </script>
