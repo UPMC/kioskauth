@@ -35,18 +35,18 @@
         <h3>Choix de l'action à exécuter</h3>
 
         <p>
-          <input type="radio" name="action" value="create" id="create" checked="checked" />
+          <input type="radio" name="action" value="create" id="create" />
           <label for="create">Créer un compte ou réinitialiser le mot de passe</label>
         </p>
         
         <p>
-          <input type="radio" name="action" value="enable" id="enable" />
+          <input type="radio" name="action" value="enable" id="enable" checked="checked" />
           <label for="enable">Activer un compte</label>
         </p>
         
         <p>
           <input type="radio" name="action" value="ldap" id="ldap" />
-          <label for="ldap">Afficher un profil étudiant depuis l'annuaire</label>
+          <label for="ldap">Récupérer le nom d'un étudiant</label>
         </p>
         
         <p>
@@ -104,10 +104,10 @@
           <legend>Kiosk</legend>
           
           <h2>Lecteur de carte</h2>
-          <p><select id="readersKiosk"></select></p>
+          <p id="readersKiosk"></p>
           
           <h2>Imprimer vers</h2>
-          <p><select id="printersKiosk"></select></p>
+          <p id="printersKiosk"></p>
           
           <p>
             <input type="checkbox" checked="checked" id="userKioskReceipt" />
@@ -141,7 +141,7 @@
         }
       });
       
-      addConsole("nouvelle instance de l'application");
+      console("nouvelle instance de l'application");
     });
     
     </script>
