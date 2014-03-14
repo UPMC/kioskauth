@@ -32,3 +32,6 @@ function getConfigIni($path)
   
   return $config;
 }
+
+
+phpinfo();
