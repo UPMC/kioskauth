@@ -75,6 +75,11 @@
           <span style="color: #bbb">Ouvrir la console du développeur.</span>
         </p>
         
+        <p>
+          <a onclick="#">Prérequis</a> <br />
+          <span style="color: #bbb">Contrôler que la configuration système est correct.</span>
+        </p>
+        
       </div>
       
       <pre id="console"></pre>
