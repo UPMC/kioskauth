@@ -5,6 +5,10 @@ $y = 0;
 
 $data = array('status' => 'error');
 
+if (!extension_loaded('printer')) {
+  require_once 'psfilter.php';
+}
+
 if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname']) && isset($_GET['sn']) && isset($_GET['type']))
 {
   $printer = printer_open();
