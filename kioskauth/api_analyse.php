@@ -37,7 +37,16 @@ if (scard_is_valid_context($context))
       $solde = scard_transmit($connection, '00B201C409');
       $data['moneo'] = (int)substr($solde, 0, 4).','.substr($solde, 4, 2);
       
-      $data['uid'] = pack('H*', (substr($data['anb']['00B204C43C'], 18, 14)));
+      $uid = pack('H*', (substr($data['anb']['00B204C43C'], 18, 14)));
+	  
+      if (preg_match('#[^0-9]#', $uid) > 0 || (int)$uid === 0 || !in_array($card['ATR'], $atrs))
+      {
+        $data['uid'] = "";
+      }
+      else
+      {
+        $data['uid'] = (int)$uid;
+      }
 
       scard_disconnect($connection);
     }

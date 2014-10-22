@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <title>KioskAuth</title>
     <link rel="stylesheet" href="static/web.css" />
-    <link rel="stylesheet" href="static/jquery/jquery-ui-1.10.2.custom.css" />
   </head>
   
   <body>
@@ -21,7 +20,9 @@
     
     <section>
     
-      <div id="message" class="notification">L'application est prête.</div>
+	  <div style="height: 80px">
+        <div id="message" class="notification">L'application est prête.</div>
+	  </div>
     
       <div class="box">
       
@@ -66,18 +67,8 @@
         </p>
         
         <p>
-          <a onclick="config(); $('#fancy').toggle();">Configuration</a> <br />
-          <span style="color: #bbb">Paramètres utilisateur de l'application.</span>
-        </p>
-        
-        <p>
           <a onclick="$('#console').toggle()">Console</a> <br />
           <span style="color: #bbb">Ouvrir la console du développeur.</span>
-        </p>
-        
-        <p>
-          <a onclick="#">Prérequis</a> <br />
-          <span style="color: #bbb">Contrôler que la configuration système est correct.</span>
         </p>
         
       </div>
@@ -85,49 +76,6 @@
       <pre id="console"></pre>
       
     </section>
-
-    <div id="fancy">
-      <div>
-      
-        <fieldset>
-          <legend>Tableau de bord</legend>
-          
-          <h2>Lecteur de carte</h2>
-          <p><select id="readersAdm"></select></p>
-          
-          <h2>Imprimer vers</h2>
-          <p><select id="printersAdm"></select></p>
-          
-          <p>
-            <input type="checkbox" checked="checked" id="userDashboardReceipt" />
-            <label for="userDashboardReceipt">Utiliser le format ticket pour cette imprimante</label>
-          </p>
-          
-        </fieldset>
-        
-        <fieldset>
-          <legend>Kiosk</legend>
-          
-          <h2>Lecteur de carte</h2>
-          <p id="readersKiosk"></p>
-          
-          <h2>Imprimer vers</h2>
-          <p id="printersKiosk"></p>
-          
-          <p>
-            <input type="checkbox" checked="checked" id="userKioskReceipt" />
-            <label for="userKioskReceipt">Utiliser le format ticket pour cette imprimante</label>
-          </p>
-        
-        </fieldset>
-        
-        <p>
-          <input type="button" value="Enregistrer" onclick="config()" />
-          <input type="button" value="Fermer" onclick="$('#fancy').toggle()" />
-        </p>
-        
-      </div>
-    </div>
     
     <script src="static/jquery-1.11.0.min.js"></script>
     <script src="static/web.js"></script>

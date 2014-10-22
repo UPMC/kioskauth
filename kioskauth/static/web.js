@@ -8,17 +8,19 @@
  */
 function message(message, css)
 {
-  $('#message').html(message);
-  $('#message').attr('class', css);
+  $('#message').slideUp(400, function () {
+    $('#message').html(message);
+    $('#message').attr('class', css);
+    $('#message').slideDown();
+  });
 }
 
 /**
  * Try to get the uid from card reader, and if it's not
  * possible, get it from user interface.
  *
- * @param message string
- * @param status string
- * @return void
+ * @param void
+ * @return integer
  */
 function reader()
 {
@@ -152,7 +154,7 @@ function ldap()
           message("Erreur ApiLdap, impossible de récupérer les informations dans l'annuaire", 'error');
         }
       },
-	    error: function()
+      error: function()
       {
         message("Erreur jQuery_ApiLdap, impossible de récupérer les informations dans l'annuaire", 'error');
       }
@@ -166,7 +168,7 @@ function printer(uid, password, type)
     dataType: 'json',
     type: 'GET',
     url: 'api_printer.php',
-	  data: { uid: uid, password: password, givenname: '', sn: '', type: type },
+    data: { uid: uid, password: password, givenname: '', sn: '', type: type },
     complete: function(jqXHR, textStatus)
     {
       console(dump(jqXHR));
@@ -194,15 +196,16 @@ function analyse()
     url: 'api_analyse.php',
     complete: function(jqXHR, textStatus)
     {
+      $('#console').show();
       console(dump(jqXHR));
     },
     success: function(data, textStatus, jqXHR)
     {
-	    if (data['status'] == 'success') {
-        message("Données de la carte récupérées avec succès.", 'success');
+      if (data['status'] == 'success') {
+        message("Données de la carte récupérées avec succès. Solde Moneo de <strong>"+data['moneo']+" euros</strong>.", 'success');
         $('#uid').val(data['uid']);
-	    }
-	    else if (data['status'] == 'noreader') {
+      }
+      else if (data['status'] == 'noreader') {
         message("Aucun lecteur de carte n'est disponible sur votre ordinateur.", 'error');
       }
       else if (data['status'] == 'nocard') {
@@ -211,47 +214,14 @@ function analyse()
       else if (data['status'] == 'invalid') {
         message("Carte illisible ou non supportée.", 'error');
       }
-	    else {
+      else {
         message("Erreur ApiAnalyse, impossible de récupérer les données de la carte.", 'error');
-	    }
-	  },
+      }
+    },
     error: function(jqXHR, textStatus, errorThrown)
     {
       message("Erreur jQuery_ApiAnalyse, impossible de récupérer les données de la carte.", 'error');
     }
-  });
-}
-
-function config()
-{
-  $('#readersAdm select').html("<select></select>");
-  $('#readersKiosk').html("<select></select>");
-  $('#printersAdm').html("<select></select>");
-  $('#printersKiosk').html("<select></select>");
-  
-  $.ajax({
-    dataType: 'json',
-    type: 'GET',
-    url: 'api_config.php',
-    complete: function(jqXHR, textStatus)
-    {
-      console(dump(jqXHR));
-    },
-    success: function(data, textStatus, jqXHR)
-    {
-      if (data['status'] == 'success')
-      {
-        $.each(data['readers'], function(index, value) {
-          $('#readersAdm select').append(new Option(value, index, true, true));
-          $('#readersKiosk select').append(new Option(value, index, true, true));
-        });
-        
-        $.each(data['printers'], function(index, value) {
-          $('#printersAdm select').append(new Option(value['NAME'], value['NAME'], true, true));
-          $('#printersKiosk select').append(new Option(value['NAME'], value['NAME'], true, true));
-        });
-      }
-    },
   });
 }
 
