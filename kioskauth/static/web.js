@@ -116,10 +116,10 @@ function enable()
       success: function(data, textStatus, jqXHR)
       {
         if (data['status'] == 'success') {
-          message("Le compte a été activé avec succès.", 'success');
+          message("Le compte <strong>"+uid+"</strong> a été activé avec succès.", 'success');
         }
         else {
-          message("Impossible d'activer le compte.", 'error');
+          message("Impossible d'activer le compte <strong>"+uid+"</strong>.", 'error');
         }
       },
       error: function()
