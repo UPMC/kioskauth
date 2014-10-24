@@ -2,6 +2,14 @@
 
 require_once 'config.php';
 
+# Supported cards ATR
+$atrs = array(
+  '3B66000090D1020140B1',
+  '3B66000090D1020152B1',
+  '3B6600000512010101B1',
+  '3B690000AC04000004B18C6121'
+);
+
 $data = array('status' => 'error');
 
 $context = scard_establish_context();
@@ -20,7 +28,9 @@ if (scard_is_valid_context($context))
     }
     else
     {
-      $data = array('status' => 'success', 'readers' => $readers, 'context' => $context, 'connection' => $connection, 'card' => scard_status($connection));
+	  $card = scard_status($connection);
+	  
+      $data = array('status' => 'success', 'readers' => $readers, 'context' => $context, 'connection' => $connection, 'card' => $card);
       
       # ANB
       scard_transmit($connection, '00A4040C06A00000006991');
