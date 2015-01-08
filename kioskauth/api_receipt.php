@@ -1,5 +1,7 @@
 <?php
 
+# Les parties commentees dans ce fichier concernent l'impression du coupon
+# de la charte a signer, qui n'est plus necessaire.
 $x = 6;
 $y = 0;
 
@@ -16,9 +18,9 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
     printer_set_option($printer, PRINTER_PAPER_FORMAT, PRINTER_FORMAT_CUSTOM);
     printer_set_option($printer, PRINTER_PAPER_WIDTH, 80);
 	  
-    $fontL = printer_create_font('Calibri', 35, 14, PRINTER_FW_NORMAL, false, false, false, 0);
+    //$fontL = printer_create_font('Calibri', 35, 14, PRINTER_FW_NORMAL, false, false, false, 0);
     $fontB = printer_create_font('Calibri', 35, 14, PRINTER_FW_BOLD, false, false, false, 0);
-    $fontC = printer_create_font('Free 3 of 9', 40, 50, PRINTER_FW_NORMAL, false, false, false, 0);
+    //$fontC = printer_create_font('Free 3 of 9', 40, 50, PRINTER_FW_NORMAL, false, false, false, 0);
     
     if ($_GET['type'] == 'new')
     {
@@ -32,7 +34,7 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       printer_draw_text($printer, utf8_decode((string)$_GET['password']), 325+$x, 372+$y);
       
       printer_end_page($printer);
-      printer_start_page($printer);
+      /*printer_start_page($printer);
       
       printer_draw_bmp($printer, 'static/coupon_r.bmp', $x, $y);
       
@@ -50,7 +52,7 @@ if (isset($_GET['uid']) && isset($_GET['password']) && isset($_GET['givenname'])
       
       printer_draw_text($printer, utf8_decode('*'.(string)$_GET['uid'].'*'), 50+$x, 800+$y); # Spacer pour la signature
       
-      printer_end_page($printer);
+      printer_end_page($printer);*/
       printer_end_doc($printer);
     }
     else

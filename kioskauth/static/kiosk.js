@@ -142,7 +142,7 @@ function create(uid, user)
         printer(uid, data['password'], user, 'new');
       }
       else if (data['status'] == 'disabled') {
-        message("Votre compte n'est pas actif, avez-vous signé la charte ?", 'error', 'bug.png');
+        message("Votre compte est désactivé actif, veuillez vous adresser au technicien", 'error', 'bug.png');
       }
       else {
         message("Erreur ApiCreate, veuillez vous adresser au technicien", 'error', 'bug.png');
