@@ -52,32 +52,20 @@ function reader()
     {
       if (data['status'] == 'success') {
         message("Exécution en cours...", 'notification', 'loader.gif');
-        $("#screensaver").fadeOut();
         ldap(data['uid']);
         remove();
       }
       else if (data['status'] == 'nocard')
       {
         message("Insérez votre carte étudiant dans le lecteur", 'notification', 'insert.gif');
-        
-        if (ssDelay > 0) {
-          ssDelay--;
-        }
-        else {
-          $("#screensaver").fadeIn('slow');
-          screensaver();
-        }
-        
         setTimeout(function() { reader(); }, 1000);
       }
       else if (data['status'] == 'invalid') {
         message("Carte non supportée, récupérez votre carte", 'error', 'bug.png');
-        $("#screensaver").fadeOut();
         remove();
       }
       else {
         message("Erreur ApiReader, veuillez vous adresser au technicien", 'error', 'bug.png');
-        $("#screensaver").fadeOut();
         remove();
       }
     },
@@ -85,7 +73,6 @@ function reader()
     {
       /* En raison d'un grand nombre d'erreur 500 provoquées par scard_disconnect */
       message("Erreur jQuery_ApiReader, tentative de redémarrage de l'application...", 'error', 'bug.png');
-      ssCountDown = ssDelay;
       setTimeout(function() { location.reload(); }, 2000);
     }
   });
@@ -217,20 +204,3 @@ function remove()
   });
 }
 
-/**
- * Animate image for screensaver.
- *
- * @param void
- * @return void
- */
-function screensaver()
-{
-  image = $("#screensaver img");
-  
-  maxLeft = $(window).width() - image.width();
-  maxTop = $(window).height() - image.height();
-  leftPos = Math.floor(Math.random() * (maxLeft + 1));
-  topPos = Math.floor(Math.random() * (maxTop + 1));
-  
-  image.css({ left: leftPos, top: topPos });
-}
