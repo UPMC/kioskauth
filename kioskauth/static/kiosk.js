@@ -129,7 +129,7 @@ function create(uid, user)
         printer(uid, data['password'], user, 'new');
       }
       else if (data['status'] == 'disabled') {
-        message("Votre compte est désactivé actif, veuillez vous adresser au technicien", 'error', 'bug.png');
+        message("Votre compte est désactivé, veuillez vous adresser au technicien", 'error', 'bug.png');
       }
       else {
         message("Erreur ApiCreate, veuillez vous adresser au technicien", 'error', 'bug.png');
@@ -156,7 +156,7 @@ function printer(uid, password, user, type)
   $.ajax({
     dataType: 'json',
     type: 'GET',
-    url: 'api_receipt.php',
+    url: 'api_printer.php',
 	  data: { uid: uid, password: password, givenname: user['givenname'], sn: user['sn'], type: type },
     success: function(data, textStatus, jqXHR)
     {
@@ -204,3 +204,6 @@ function remove()
   });
 }
 
+$(document).ready(function() {
+  reader();
+});

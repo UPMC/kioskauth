@@ -80,7 +80,7 @@ function create()
           printer(uid, data['password'], 'recovery');
         }
         else if (data['status'] == 'created') {
-          message("Un nouveau compte a été créé, il est actuellement désactivé.", 'success');
+          message("Un nouveau compte a été créé.", 'success');
           printer(uid, data['password'], 'new');
         }
         else if (data['status'] == 'disabled') {
@@ -93,38 +93,6 @@ function create()
       error: function()
       {
         message("Erreur jQuery_ApiCreate, impossible de créer le compte.", 'error');
-      }
-    });
-  }
-}
-
-function enable()
-{
-  uid = reader();
-  
-  if (uid != '')
-  {
-    $.ajax({
-      dataType: 'json',
-      type: 'GET',
-      url: 'api_enable.php',
-      data: { uid: uid },
-      complete: function(jqXHR, textStatus)
-      {
-        console(dump(jqXHR));
-      },
-      success: function(data, textStatus, jqXHR)
-      {
-        if (data['status'] == 'success') {
-          message("Le compte <strong>"+uid+"</strong> a été activé avec succès.", 'success');
-        }
-        else {
-          message("Impossible d'activer le compte <strong>"+uid+"</strong>.", 'error');
-        }
-      },
-      error: function()
-      {
-        message("Erreur jQuery_ApiEnable, impossible d'activer le compte.", 'error');
       }
     });
   }
@@ -233,10 +201,6 @@ function execute()
     console("execute() lance l'action create()");
     create();
   }
-  else if (selected == 'enable') {
-    console("execute() lance l'action enable()");
-    enable();
-  }
   else if (selected == 'ldap') {
     console("execute() lance l'action ldap()");
     ldap();
@@ -297,3 +261,18 @@ function actionClick()
     $('#uid').removeAttr('disabled');
   }
 }
+
+$(document).ready(function()
+{
+  $('input:radio[name=action]').change(function() {
+    actionClick();
+  });
+  
+  $('#uid').keypress(function(e) {
+    if (e.which == 13) {
+      execute();
+    }
+  });
+  
+  console("nouvelle instance de l'application");
+});

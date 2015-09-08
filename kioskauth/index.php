@@ -36,13 +36,8 @@
         <h3>Choix de l'action à exécuter</h3>
 
         <p>
-          <input type="radio" name="action" value="create" id="create" />
+          <input type="radio" name="action" value="create" id="create" checked="checked" />
           <label for="create">Créer un compte ou réinitialiser le mot de passe</label>
-        </p>
-        
-        <p>
-          <input type="radio" name="action" value="enable" id="enable" checked="checked" />
-          <label for="enable">Activer un compte</label>
         </p>
         
         <p>
@@ -79,25 +74,5 @@
     
     <script src="static/jquery-1.11.0.min.js"></script>
     <script src="static/web.js"></script>
-    
-    <script>
-    
-    $(document).ready(function()
-    {
-      $('input:radio[name=action]').change(function() {
-        actionClick();
-      });
-      
-      $('#uid').keypress(function(e) {
-        if (e.which == 13) {
-          execute();
-        }
-      });
-      
-      console("nouvelle instance de l'application");
-    });
-    
-    </script>
-  
   </body>
 </html>

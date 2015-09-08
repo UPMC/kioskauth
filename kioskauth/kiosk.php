@@ -21,14 +21,5 @@
     
     <script src="static/jquery-1.11.0.min.js"></script>
     <script src="static/kiosk.js"></script>
-  
-    <script>
-
-      $(document).ready(function() {
-        reader();
-      });
-      
-    </script>
-  
   </body>
 </html>
